@@ -1,0 +1,508 @@
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    position: relative;
+    border: none;
+}
+html{
+    scroll-behavior: smooth;
+}
+
+body{
+    background-color: #250001;
+    background: linear-gradient(to right, #011608de, #01461bee);
+    color: #000000;
+    font-family: 'Roboto Condensed', Calibri, Arial, sans-serif;
+    font-size: 0.96rem;
+    font-weight: 300;
+}
+html, body{
+    height: 100%;
+}
+
+p{
+    color: white;
+}
+
+
+/*div que contém todo o header e headline*/
+.bg {
+    position: relative;
+    height: 100vh; 
+    overflow: hidden; 
+}
+
+.bg::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url("../../assets/imagens/home.svg") no-repeat center;
+    background-size: cover;
+    filter: brightness(30%); 
+}
+
+
+/*Div dentro de bg contendo header e headline*/
+.central {
+    position: relative; 
+    z-index: 1; 
+     height: 100%; 
+}
+/*Efeito de blur verde no fim da headline*/
+.degrade {
+    /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#001307+0,011a01+90,011807+100;Green+3D+%231 */
+    background: -moz-linear-gradient(top, rgba(0,19,7,0) 0%, rgba(0,26,1,1) 90%, rgba(0,24,7,1) 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, rgba(0,19,7,0) 0%,rgba(0,26,1,1) 90%,rgba(0,24,7,1) 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, rgba(0,19,5,0) 0%,rgb(1,26,1) 90%,rgb(1,24,7) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#001307', endColorstr='#011807',GradientType=0 ); /* IE6-9 */
+    display: block;
+    height: 30%;
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+}
+
+/*Estilização do header navbar*/
+header{
+   background: #ff6a00; 
+   border-radius: 0 0 10px 10px;
+   border-bottom: rgba(255,255,255,0.08) solid 1px;
+   margin: 0 7px;
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   flex-wrap: wrap;
+   position: absolute;
+   z-index: 3;
+   width: calc(100% - 14px);
+}
+
+.logo {
+    font-family: 'Koulen', 'Roboto Condensed'; 
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.1rem;
+    display: flex;
+    padding: 6px 15px;
+    align-items: center;
+    font-size: 25px;
+}
+
+.logo-img {
+    width: auto; 
+    max-width: 50px; 
+}
+
+/*navbar dropdown menu*/
+#chk-toggle{
+    display: none;
+}
+#toggle{
+    display: inline-block;
+    padding: 11px;
+    cursor: pointer;
+    
+}
+#toggle span{
+    display: block;
+    width: 22px;
+    height: 3px;
+    background: #ffffff;
+    margin: 2px;
+}
+
+/*navbar items*/
+nav{
+    flex-basis: 100%;
+    height: 0;            
+    overflow: hidden;
+    font-weight: 600;
+}
+nav ul{
+    margin: 0 15px;
+    list-style: none;
+}
+nav ul li{
+    border-bottom: rgba(255,255,255,0.06) solid 1px;
+}
+nav ul li:nth-last-child(1){
+    border-bottom: none;
+}
+nav a{
+    color: #fff;
+    text-decoration: none;
+    display: block;
+    text-align: center;
+    font-size: 0.98rem;
+    padding: 8px;
+}
+.navbar-link::before{
+    content: '';
+    position: absolute;
+    top: 95%;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: #fff;
+    transition: .3s;
+}
+.navbar-link:hover::before{
+    width: 100%;
+}
+#chk-toggle:checked ~ nav{
+    height: auto;
+}
+
+/*Estilização do texto da headline com efeito*/
+.headline{
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    margin: 0 15px;
+    flex-direction: column;
+    opacity: 0; 
+    transform: translateX(-100%); 
+    transition: opacity 0.5s ease, transform 0.5s ease; 
+}
+
+.headline.show {
+    opacity: 1;
+    transform: translateX(0); 
+}
+
+h1 {
+    font-family: 'Koulen', 'Roboto Condensed'; 
+    color: #fff;
+    font-size: 4rem;
+    text-shadow: 5px 15px 10px rgb(0, 0, 0); 
+    line-height: 3.3rem;
+}
+
+h1 span {
+    color: #fff;
+    display: block;
+}
+
+/*Subtexto headline*/
+.subtext{
+    font-size: 2rem;
+}
+
+/*Botões headline*/
+.ladoalado a {
+    font-family: 'Koulen', 'Roboto Condensed'; 
+    text-decoration: none;
+    padding: 10px 20px;
+    margin: 4px;
+    font-size: 1rem; 
+    transition: all 0.3s ease;
+    display: inline-block;
+    text-align: center;
+}
+
+.ladoalado a:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.ladoalado a:hover .btn,
+.ladoalado a:hover .clean {
+    padding: 12px 24px;
+}
+
+/*primeiro botão headline*/
+.btn {
+    background: #ff6a00;
+    border: 2px solid #000000;
+    color: #fff;
+}
+
+/*segundo botão headline*/
+.clean {
+    background: transparent;
+    border: 2px solid #ff6a00;
+    color: #fff;
+}
+
+/*Botão de login (index.php)*/
+.btn-login {
+    
+    padding: 10px 20px;
+    text-decoration: none;
+    background-color: #b64d02; 
+    color: #fff; 
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: 700;
+    transition: background-color 0.3s ease;
+
+}
+
+.btn-login:hover {
+    background-color: #e05600; 
+    
+}
+
+/*Botão de sair (logged_index.php e outas páginas onde o usuário já está logado)*/
+.logout-btn {
+    padding: 8px 16px;
+    background-color: #ff6a00;
+    color: #fff;
+    font-size: 0.85rem;
+    font-weight: 700;
+    border: 2px solid #00000086; 
+    border-radius: 20px; 
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease, border 0.3s ease; 
+}
+
+.logout-btn:hover {
+    background-color: #e05600; 
+    border: 2px solid #e05600; 
+   
+}
+
+/*seções*/
+section{
+    margin: 0 15px 30px 15px;
+    clear: both;
+    padding-top: 30px;
+}
+/*titulo das seções*/
+h2{
+    font-family: 'Roboto Condensed', Calibri, Arial;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: #ffffff;
+    text-transform: uppercase;
+}
+/*texto das seções*/
+article p{
+    font-size: larger;
+    font-weight: 400;
+}
+/*imagem da seção*/
+.esq{float: left;}
+.margdir{margin-right: 13px; margin-bottom: 8px;}
+.w43{width: 43%;}
+
+/*estilização de seção de ajuda*/
+.ajuda{
+    white-space: nowrap;
+    width: calc(100% + 15px);
+    display: block;
+    overflow-y: auto;
+}
+.ajuda ul{
+    list-style: none;
+    margin-bottom: 10px;
+    font-size: 0;
+}
+.ajuda ul li{
+    display: inline-block;
+    width: 75%;
+    padding: 5px;
+}
+.ajuda ul li a{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.ajuda ul li img{
+    width: 100%;
+    height: auto;
+    z-index: 0;
+}
+/*Caixa de assinatura à direita das imagens*/
+.boxassine{
+   background: rgba(255,106 , 0 , 0.979); 
+   border-bottom: rgba(255,255,255,0.08) solid 1px;
+   border-right: rgba(255,255,255,0.08) solid 1px;
+   border-top: rgba(0,0,0,0.5) solid 1px;
+   border-left: rgba(0,0,0,0.5) solid 1px;
+   border-radius: 20px;
+   padding: 20px;
+   margin-top: 30px;
+   text-align: center;
+}
+.assine, .preco, .vantagens{
+    display: block;
+    color: #fff;
+    text-transform: uppercase;
+}
+.assine{
+    font-size: 1.2rem;
+    font-weight: 900;
+}
+.doe{
+    color: #fff;
+}
+.preco{
+    font-size: 3rem;
+    font-weight: 700;
+}
+.vantagens{
+    font-size: 1rem;
+    padding: 0 10%;
+    font-weight: 900;
+}
+/*paypal imagem*/
+.doacao{
+    max-width: 259px;
+    width: 90%;
+}
+/*estilização do fotter*/
+footer{
+    background: #ff6a00;
+    padding: 40px 0;
+    text-align: center;
+    margin-top: 40px;
+    
+}
+#redes{
+    color: #fff;
+    font-weight: 600;
+}
+.redes{
+    display: flex;
+    justify-content: center;
+    margin-top: 8px;
+    margin-bottom: 25px;
+    font-weight: 600;
+}
+.redes a{
+    display: flex;
+    background: #fff;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    text-decoration: none;
+    justify-content: center;
+    align-items: center;
+    margin: 5px;
+    font-size: 1.2rem;
+    color:#162336
+}
+
+
+
+/*estilização de responsividade*/
+
+@media only screen and (min-width: 500px){
+    .ajuda ul li{
+        width: 65%;
+    }
+}
+@media only screen and (min-width: 600px){
+    .ajuda{
+        white-space: normal;
+        width: 100%;
+    }
+    .ajuda ul li{
+        width: 50%;
+    }
+    h1 {
+        font-size: 5rem;
+        line-height: 4.3rem;
+    }
+    .btn {
+        font-size: 1.18rem;
+    }
+    
+}
+@media only screen and (min-width: 700px){
+    nav{
+        height: auto;
+        overflow-y: unset;
+        flex-basis: unset;
+    }
+    #toggle{
+        display: none;
+    }
+    nav ul li{
+        display: inline-block;
+        border-bottom: none;
+    }
+    nav a{
+        padding: 8px 12px;
+    }
+    
+}
+@media only screen and (min-width: 850px){            
+    .spaceajudar{
+        width: 67%;
+        float: left;
+    }
+    .boxassine{
+        width: 32%;
+        float: right;
+    }
+    .clear{
+        clear: both;
+    }
+    h1 {
+        font-size: 7rem;
+        line-height: 6.5rem;
+    }
+    .btn {
+        font-size: 1.85rem;
+    }
+}
+@media only screen and (min-width: 1200px){  
+    body{
+        font-size: 1.3rem;
+    }
+    section, .central {
+        margin: 0 auto;
+        max-width: 1200px;
+    }
+    .central{
+        height: 100%;
+    }
+    header{
+        padding: 8px;
+        border-radius: 0 0 17px 17px;
+    }
+    h1 {
+        margin-bottom: 36px;
+    }
+    .w43 {
+        width: 32%;
+    }
+    .ajuda {
+        overflow-y: unset;
+    }
+    .ajuda ul li {
+        padding: 15px;
+    }
+    .ajuda ul {
+        margin: -15px;
+    }
+    .boxassine {
+        width: 30%;
+    }
+    .boxassine {
+        margin-top: 49px;
+        min-height: 484px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+::-webkit-scrollbar{
+    height: 13px;
+    width: 5px
+  }
+  ::-webkit-scrollbar-track{
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  }
+  ::-webkit-scrollbar-thumb{
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.473);
+  }
