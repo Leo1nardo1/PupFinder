@@ -4,17 +4,13 @@ session_start();
 require_once __DIR__ . '/../vendor/autoload.php';
 use \Dotenv\Dotenv;
 
-$dotenv = Dotenv::createImmutable(__DIR__ . '/..');
-
-$dotenv->load();
 
 
-
-define('DB_HOST', $_ENV['RAILWAY_DATABASE_HOST'] ?? '');
-define('DB_USER', $_ENV['RAILWAY_DATABASE_USERNAME'] ?? '');
-define('DB_PASSWORD', $_ENV['RAILWAY_DATABASE_PASSWORD'] ?? '');
-define('DB_DATABASE', $_ENV['RAILWAY_DATABASE_NAME'] ?? '');
-define('DB_PORT', $_ENV['RAILWAY_DATABASE_PORT'] ?? '');
+define('DB_HOST', $_ENV['RAILWAY_DATABASE_HOST'] );
+define('DB_USER', $_ENV['RAILWAY_DATABASE_USERNAME'] );
+define('DB_PASSWORD', $_ENV['RAILWAY_DATABASE_PASSWORD'] );
+define('DB_DATABASE', $_ENV['RAILWAY_DATABASE_NAME'] );
+define('DB_PORT', $_ENV['RAILWAY_DATABASE_PORT']);
 
 if ($_SERVER['HTTP_HOST'] === 'localhost') {
   define('SITE_URL', 'http://' . $_SERVER['HTTP_HOST'] . '/pupfinder2/');
