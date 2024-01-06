@@ -24,7 +24,7 @@ class AuthenticationController{
     $checkAuth = $this->checkIsLoggedIn();
     if($checkAuth){
       $user_id = $_SESSION['auth_user']['id_usuario'];
-      $getUserData = "SELECT * FROM usuario WHERE idUsuario = '$user_id' LIMIT 1";
+      $getUserData = "SELECT * FROM railway.usuario WHERE idUsuario = '$user_id' LIMIT 1";
       $result = $this->conn->query($getUserData);
       if($result->num_rows > 0){
         $data = $result->fetch_assoc();
