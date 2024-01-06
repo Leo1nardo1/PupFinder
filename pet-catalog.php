@@ -125,7 +125,6 @@ include_once('controllers/PetController.php');
             </form>
             <div id="list">
                 <?php
-                var_dump($_FILES['imagem']);
                 $pets = new PetController;
                 if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['estado'])) {
                     $filterData = [
@@ -173,7 +172,7 @@ include_once('controllers/PetController.php');
                         </div>
                         
                 <?php
-                var_dump($_FILES['imagem']);
+                
                     }
                 } else {
                     echo "Nenhum registro encontrado";

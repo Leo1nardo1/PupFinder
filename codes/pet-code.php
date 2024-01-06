@@ -37,7 +37,7 @@ if (isset($_POST['add_pet'])) {
     // Validação de upload de imagem, primeiro checando se o campo não está vazio.
     if (!empty($_FILES['imagem']['name'])) {
         $fileType = mime_content_type($_FILES['imagem']['tmp_name']);
-
+        var_dump($_FILES['imagem']);
         //caso não seja png, jpeg ou jpg, é indicado que o arquivo é inválido
         if (!in_array($fileType, $allowedFileTypes)) {
             redirect("Tipo de arquivo inválido!", "pet-register.php");
