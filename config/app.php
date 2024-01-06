@@ -6,17 +6,14 @@ use \Dotenv\Dotenv;
 
 
 
-define('DB_HOST', $_ENV['RAILWAY_DATABASE_HOST'] );
-define('DB_USER', $_ENV['RAILWAY_DATABASE_USERNAME'] );
-define('DB_PASSWORD', $_ENV['RAILWAY_DATABASE_PASSWORD'] );
-define('DB_DATABASE', $_ENV['RAILWAY_DATABASE_NAME'] );
-define('DB_PORT', $_ENV['RAILWAY_DATABASE_PORT']);
+define('DB_HOST', $_ENV['DB_HOST'] );
+define('DB_USER', $_ENV['DB_USER'] );
+define('DB_PASSWORD', $_ENV['DB_PASSWORD'] );
+define('DB_DATABASE', $_ENV['DB_DATABASE'] );
+define('DB_PORT', $_ENV['DB_PORT']);
 
-if ($_SERVER['HTTP_HOST'] === 'localhost') {
-  define('SITE_URL', 'http://' . $_SERVER['HTTP_HOST'] . '/pupfinder2/');
-} else {
-  define('SITE_URL', 'https://' . $_SERVER['HTTP_HOST'] . '/');
-}
+define('SITE_URL', 'https://' . $_SERVER['HTTP_HOST'] . '/');
+
 
 
 include_once('DatabaseConnection.php');

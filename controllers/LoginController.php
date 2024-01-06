@@ -9,7 +9,7 @@
 
   //Faz a autenticação do login
   public function userLogin($email, $password) {
-    $checkLogin = "SELECT * FROM railway.Usuario WHERE email = '$email' LIMIT 1";
+    $checkLogin = "SELECT * FROM railway.usuario WHERE email = '$email' LIMIT 1";
     $result = $this->conn->query($checkLogin);
 
     if ($result->num_rows > 0) {
