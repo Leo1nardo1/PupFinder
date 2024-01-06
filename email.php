@@ -5,7 +5,7 @@ include('controllers/PetController.php');
 use PHPMailer\PHPMailer\PHPMailer;
 
 //qualquer erro retire /
-require '/vendor/autoload.php';
+require 'vendor/autoload.php';
 
 $petController = new PetController;
 
