@@ -9,7 +9,7 @@ class PetController{
 
   //Busca todos os pets da tabela Pet
   public function index(){
-    $petQuery = "SELECT * FROM railway.Pet WHERE status_delecao = 0";
+    $petQuery = "SELECT * FROM railway.pet WHERE status_delecao = 0";
     $result = $this->conn->query($petQuery);
     if($result->num_rows > 0){
         return $result;
@@ -20,7 +20,7 @@ class PetController{
   //Busca os pets com id coincidentes
   public function getPetDetailsById($petId) {
     $petQuery = "SELECT p.idPet, p.imagem, p.statusPet, p.nome, p.idade, p.sexo, p.raca, p.estado, p.cidade, p.descricaoPersona, p.historia, p.porte, p.vacina_status, p.especie, p.status_delecao, h.Usuario_idUsuario
-    FROM railway.Pet p
+    FROM railway.pet p
     JOIN railway.historico_pet h ON p.idPet = h.Pet_idPet
     WHERE p.idPet = $petId";
     $result = $this->conn->query($petQuery);
@@ -48,7 +48,7 @@ class PetController{
     $whereClause = implode(" AND ", $conditions);
 
     // Verifica se há alguma condição antes de construir a consulta SQL
-    $petQuery = "SELECT * FROM railway.Pet";
+    $petQuery = "SELECT * FROM railway.pet";
     if (!empty($whereClause)) {
         $petQuery .= " WHERE $whereClause";
     }
@@ -69,7 +69,7 @@ class PetController{
   public function create($inputData) {
     //concatena todas as informações dadas pelo usuario com vírgulas e aspas simples e insere no banco de dados
     $data = "'" . implode("','", $inputData) . "'";
-    $petQuery = "INSERT INTO railway.Pet(especie, nome, idade, sexo, raca, porte, vacina_status, estado, cidade, imagem, historia, descricaoPersona) VALUES ($data)";
+    $petQuery = "INSERT INTO railway.pet(especie, nome, idade, sexo, raca, porte, vacina_status, estado, cidade, imagem, historia, descricaoPersona) VALUES ($data)";
 
     $result = $this->conn->query($petQuery);
 
@@ -93,7 +93,7 @@ class PetController{
             return true;
         } else {
             // Rollback na inserção do pet se a inserção no historico_pet falhar.
-            $this->conn->query("UPDATE railway.Pet SET erro_registro = 1 WHERE idPet = '$lastPetId'");
+            $this->conn->query("UPDATE railway.pet SET erro_registro = 1 WHERE idPet = '$lastPetId'");
             return false;
         }
     } else {
@@ -106,7 +106,7 @@ class PetController{
 
 public function getUserPets($userId) {
   $petQuery = "SELECT p.*, h.tipo_operacao
-                FROM railway.Pet p
+                FROM railway.pet p
                 JOIN railway.historico_pet h ON p.idPet = h.Pet_idPet
                 WHERE h.Usuario_idUsuario = '$userId'
                 ORDER BY h.idHistorico DESC";
@@ -122,7 +122,7 @@ public function getUserPets($userId) {
 
 public function getUserRegisteredPets($userId) {
     $petQuery = "SELECT p.*, h.tipo_operacao
-                 FROM railway.Pet p
+                 FROM railway.pet p
                  JOIN railway.historico_pet h ON p.idPet = h.Pet_idPet
                  WHERE h.Usuario_idUsuario = '$userId' AND h.tipo_operacao = 'Registro'
                    AND p.statusPet = 1
@@ -152,7 +152,7 @@ public function getUserPetCount($userId) {
                        GROUP BY Pet_idPet
                    ) AS latestHistories
                    JOIN railway.historico_pet h ON latestHistories.maxId = h.idHistorico
-                   JOIN railway.Pet p ON h.Pet_idPet = p.idPet
+                   JOIN railway.pet p ON h.Pet_idPet = p.idPet
                    WHERE h.tipo_operacao = 'Registro' AND p.status_delecao = 0";
 
     $result = $this->conn->query($countQuery);
@@ -179,7 +179,7 @@ public function getUserDonatedPetCount($userId) {
 
 public function edit($id){
   $pet_id = validateInput($this->conn, $id);
-  $petQuery = "SELECT * FROM railway.Pet WHERE idPet = '$pet_id' LIMIT 1";
+  $petQuery = "SELECT * FROM railway.pet WHERE idPet = '$pet_id' LIMIT 1";
   $result = $this->conn->query($petQuery);
   if($result->num_rows == 1){
     $data = $result->fetch_assoc();
@@ -204,7 +204,7 @@ public function update($inputData, $id){
   $vacinaStatus = $inputData['vacina_status'];
   $especie = $inputData['especie'];
 
-  $petUpdateQuery = "UPDATE railway.Pet 
+  $petUpdateQuery = "UPDATE railway.pet 
                      
                      SET nome = '$nome', idade ='$idade', sexo ='$sexo', raca ='$raca', estado ='$estado', cidade ='$cidade', descricaoPersona ='$descricaoPersona', historia ='$historia', porte ='$porte', vacina_status ='$vacinaStatus', especie ='$especie'
                      
@@ -237,7 +237,7 @@ public function getLastOperation($petId) {
 
 public function deletePet($petId) {
   // Mark the pet as deleted in the database
-  $updateQuery = "UPDATE railway.Pet SET status_delecao = 1 WHERE idPet = '$petId'";
+  $updateQuery = "UPDATE railway.pet SET status_delecao = 1 WHERE idPet = '$petId'";
   
   $result = $this->conn->query($updateQuery);
 
