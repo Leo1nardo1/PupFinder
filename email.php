@@ -32,11 +32,11 @@ if(isset($_POST['send'])){
               $mail->addAddress($recipientEmail);
           } else {
               // Handle the case where the email couldn't be obtained (provide a default email or log an error)
-              $mail->addAddress('default@example.com');
+              $mail->addAddress($senderEmail);
           }
       } else {
           // Handle the case where the user ID couldn't be obtained (provide a default user ID or log an error)
-          $mail->addAddress('default@example.com');
+          $mail->addAddress($senderEmail);
       }
   } else {
       // Handle the case where the pet ID couldn't be obtained from the URL
