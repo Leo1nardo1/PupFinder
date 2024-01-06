@@ -8,12 +8,10 @@
     }
 
     //Registra as informações de cadastro no banco de dados e retorna a inserção.
-    public function registration($fname, $lname, $email, $password){
-
-      $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-      $register_query = "INSERT INTO railway.usuario (nome, sobrenome, email, senha) VALUES ('$fname', '$lname', '$email', '$hashedPassword')";
-      $result = $this->conn->query($register_query);
-      return $result;
+   public function registration($fname, $lname, $email, $password) {
+        $register_query = "INSERT INTO railway.usuario (nome, sobrenome, email, senha) VALUES ('$fname', '$lname', '$email', '$password')";
+        $result = $this->conn->query($register_query);
+        return $result;
     }
 
     //Checa no banco de dados se o número de fileiras retornados com a SELECT query é maior que 0, se for, retorna true.
