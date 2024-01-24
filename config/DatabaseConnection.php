@@ -13,8 +13,6 @@ class DatabaseConnection {
       $customErrorMessage = "<h1>" . $e->getMessage() . "</h1>";
       die($customErrorMessage);
     }
-    
   }
 }
-
 ?>

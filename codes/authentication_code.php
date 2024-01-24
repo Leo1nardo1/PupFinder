@@ -27,31 +27,59 @@ include_once(__DIR__ . '/../controllers/LoginController.php');
 
   }
 
-  if(isset($_POST['register_btn'])){
-    //Recebe e valida as informações digitadas pelo usuário.
+
+
+  if (isset($_POST['register_btn'])) {
     $fname = validateInput($db->conn, $_POST['fname']);
     $lname = validateInput($db->conn, $_POST['lname']);
     $email = validateInput($db->conn, $_POST['email']);
     $password = validateInput($db->conn, $_POST['password']);
     $confirm_password = validateInput($db->conn, $_POST['confirm_password']);
 
-    $register = new RegisterController;
-    //Coloca o resultado da função confirmPassword na variável result_password
-    $result_password = $register->confirmPassword($password, $confirm_password);
-    //Caso a senha esteja correta, ele checa se o email já está registrado no banco de dados
-    if($result_password){
-      $result_user = $register->isUserExists($email);
-      if($result_user){
-        redirect("E-mail já cadastrado!", "login.php");
-      }else{
-        //Caso o e-mail não esteja cadastrado, registra os dados no banco de dados e finaliza cadastro.
-        $register_query = $register->registration($fname, $lname, $email, $password);
-        if($register_query){
-          redirect("Cadastro realizado com sucesso!", "login.php");
-        }else{
-          redirect("Algo deu errado.", "login.php");
-        }
-      }
+    // Improved email validation using API
+    $api_key = "";
+    $ch = curl_init();
+
+    curl_setopt_array($ch, [
+        CURLOPT_URL => "https://emailvalidation.abstractapi.com/v1/?api_key=$api_key&email=$email",
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_FOLLOWLOCATION => true
+    ]);
+
+    $response = curl_exec($ch);
+
+    curl_close($ch);
+
+    $data = json_decode($response, true);
+
+    // Check if the email is undeliverable or disposable
+    if ($data['deliverability'] === "UNDELIVERABLE") {
+        redirect("E-mail não existe!", "login.php");
     }
-  }
+
+    if ($data["is_disposable_email"]["value"] === true) {
+        redirect("E-mail é descartável!", "login.php");
+    }
+
+    // Continue with the rest of your registration logic
+    $register = new RegisterController;
+    $result_password = $register->confirmPassword($password, $confirm_password);
+
+    if ($result_password) {
+        $result_user = $register->isUserExists($email);
+
+        if ($result_user) {
+            redirect("E-mail já cadastrado!", "login.php");
+        } else {
+            $register_query = $register->registration($fname, $lname, $email, $password);
+
+            if ($register_query) {
+                redirect("Cadastro realizado com sucesso!", "login.php");
+            } else {
+                redirect("Algo deu errado.", "login.php");
+            }
+        }
+    }
+}
+
 ?>
