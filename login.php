@@ -51,7 +51,6 @@ $auth->isLoggedIn();
     <main>
 
         <div class="box">
-
             <div class="inner-box">
                 <div class="forms-wrap">
 
@@ -99,6 +98,7 @@ $auth->isLoggedIn();
                             <h6>Já tem uma conta?</h6>
                             <a href="#" class="toggle-form">Entrar</a>
                         </div>
+
                         <div class="actual-form">
                             <div class="input-wrap">
                                 <input type="text" autocomplete="off" name="fname" required class="input-field" />
@@ -109,7 +109,7 @@ $auth->isLoggedIn();
                                 <label>Sobrenome</label>
                             </div>
                             <div class="input-wrap">
-                                <input type="email" autocomplete="off"   name="email" required class="input-field" />
+                                <input type="email" autocomplete="off" name="email" required class="input-field" />
                                 <label>Email</label>
                             </div>
                             <div class="input-wrap">
@@ -132,7 +132,31 @@ $auth->isLoggedIn();
                     </form>
 
                 </div>
-                <div class="carousel"></div>
+
+                <div class="carousel">
+                    <div class="images-wrapper">
+                        <img src="assets/imagens/logindoggo.png" class="image img-1 show" alt="PupFinder">
+                         <img src="assets/imagens/logindoggo1.png" class="image img-2" alt="PupFinder">
+                        <img src="assets/imagens/logindoggo2.png" class="image img-3" alt="PupFinder"> 
+                    </div>
+
+
+                    <div class="text-slider">
+                        <div class="text-wrap">
+                            <div class="text-group">
+                                <h2>Adote um pet</h2>
+                                <h2>Doe seus bichinhos</h2>
+                                <h2>Divirta-se!</h2>
+                            </div>
+                        </div>
+                        <div class="bullets">
+                            <span class="active" data-value="1"></span>
+                            <span data-value="2"></span>
+                            <span data-value="3"></span>
+                        </div>
+
+                    </div>
+                </div>
             </div>
         </div>
     </main>
