@@ -27,7 +27,8 @@ toggle_btn.forEach((btn) => {
   });
 });
 
-let currentIndex = 1; // Start from the first bullet
+//Auto slide / Bullet points in login page
+let currentIndex = 1; 
 const totalBullets = bullets.length;
 
 function moveSlider(index) {
@@ -39,24 +40,24 @@ function moveSlider(index) {
   textSlider.style.transform = `translateY(${-(index - 1) * 2.2}rem)`;
 
   bullets.forEach((bull) => bull.classList.remove("active"));
-  bullets[index - 1].classList.add("active"); // Use index - 1 for zero-based index
+  bullets[index - 1].classList.add("active"); 
 }
 
 function autoSlide() {
   currentIndex++;
   if (currentIndex > totalBullets) {
-    currentIndex = 1; // Loop back to the first bullet
+    currentIndex = 1; 
   }
   moveSlider(currentIndex);
 }
 
-// Set interval to change slides every 2 seconds (2000 ms)
+
 setInterval(autoSlide, 5000);
 
-// Add click event listeners to bullets
+
 bullets.forEach((bullet) => {
   bullet.addEventListener("click", function() {
-    currentIndex = this.dataset.value; // Update currentIndex on click
+    currentIndex = this.dataset.value; 
     moveSlider(currentIndex);
   });
 });
